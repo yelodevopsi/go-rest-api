@@ -4,8 +4,8 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
-	"github.com/swaggo/gin-swagger/swaggerFiles"
 	_ "github.com/yelodevopsi/go-rest-api/docs" // This is to include the generated docs
 )
 
@@ -28,11 +28,13 @@ func main() {
 
 	// Swagger endpoint
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	// http://localhost:8080/swagger/index.html#/
 
 	// API routes
 	v1 := r.Group("/api/v1")
 	{
 		v1.GET("/ping", Ping)
+		// http://localhost:8080/api/v1/ping
 	}
 
 	r.Run(":8080")
